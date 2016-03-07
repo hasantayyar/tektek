@@ -10,3 +10,17 @@ An http load test tool.
 - This project is not well documented.
 
 There is some [super cool crystal projects](https://github.com/search?l=crystal&q=http&ref=simplesearch&type=Repositories&utf8=%E2%9C%93) if you want to check.
+
+
+## Build
+
+```
+crystal build src/tektek.cr --release
+```
+
+## Use
+
+```
+./tektek -u http://hasantayyar.net -n 100
+```
+
