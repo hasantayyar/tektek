@@ -1,7 +1,9 @@
 # tektek
-An http load test tool.
+An http load test tool by.
 
-**This is a demo crystal-lang project.** And this means :
+**I am very beginner with crystal-lang** and **this is a demo project.**
+
+And this means :
 
 - Do not use for production
 - You can fork this and improve
