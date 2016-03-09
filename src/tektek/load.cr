@@ -1,6 +1,7 @@
 module Tektek
   class Load
-    def initialize(@host : String, @req_num : Int32)
+    def initialize(@host : String, @request_number : Int32)
+      Tektek.create_stats @request_number
 
       ch = Channel(Nil).new
       uri = URI.parse @host
@@ -11,33 +12,34 @@ module Tektek
       spawn do
         loop do
           request = Request.new client, uri
+          Tektek.stats << request
           ch.send nil
         end
       end
 
       # listen channel
       loop do
+        if Tektek.stats.requests.size == Tektek.stats.request_number
+          self.summary
+          exit
+        end
         ch.receive
       end
 
     end
-  end
 
-  class Request
-
-    def initialize(http_client, uri)
-      @time_a = Time.now
-      response = http_client.get uri.full_path
-      @time_b = Time.now
-      @status_code = response.status_code
-    end
-
-    def is_success
-        @status_code == 200 || @status_code == 301 || @status_code == 302
-    end
-
-    def time_ab
-      (@time_b - @time_a).to_f * 1000.0
+    def summary
+      # @todo : add transferred data size statistic
+      puts "________________________\n\n"
+      puts "Elapsed time : #{Tektek.stats.total_time} ms"
+      puts "Transactions : #{Tektek.stats.requests.size} hits"
+      puts "Shortest transaction : #{Tektek.stats.min_req_time} ms"
+      puts "Longest transaction  : #{Tektek.stats.max_req_time} ms"
+      puts "Average transaction  : #{Tektek.stats.total_time/Tektek.stats.requests.size} ms\n"
+      puts "________________________"
+      puts "Transaction rate : #{1000/ (Tektek.stats.total_time/Tektek.stats.requests.size)} trans/sec"
+      puts "Successful transactions #{Tektek.stats.ok_requests}"
+      puts "Failed transactions #{Tektek.stats.not_ok_requests}"
     end
   end
 end
