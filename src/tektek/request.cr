@@ -13,7 +13,7 @@ module Tektek
     end
 
     def time_ab
-      ((@time_b - @time_a) * 1000).to_f
+      @ab = ((@time_b - @time_a) * 1000).to_f
     end
   end
 end
