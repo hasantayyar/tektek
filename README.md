@@ -26,3 +26,19 @@ crystal build src/tektek.cr --release
 ./tektek -u http://hasantayyar.net -n 100
 ```
 
+Output
+```
+________________________
+
+Elapsed time : 6393.71 ms
+Transactions : 100 hits
+Shortest transaction : 60.495 ms
+Longest transaction  : 266.518 ms
+Average transaction  : 63.9371 ms
+________________________
+Transaction rate : 15.6404 trans/sec
+Successful transactions 100
+Failed transactions 0
+```
+
+
