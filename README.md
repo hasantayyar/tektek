@@ -13,6 +13,7 @@ And this means :
 
 There are many [super cool crystal projects](https://github.com/search?l=crystal&q=http&ref=simplesearch&type=Repositories&utf8=%E2%9C%93) if you want to check.
 
+If you are looking for a stable load testing tool you may like to use [siege](https://github.com/JoeDog/siege)
 
 ## Build
 
